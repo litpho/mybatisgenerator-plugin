@@ -31,6 +31,10 @@ open class MybatisGeneratorTask: DefaultTask() {
     @Internal
     lateinit var configuration: org.gradle.api.artifacts.Configuration
 
+    init {
+        group = "Mybatis Generator"
+    }
+
     @TaskAction
     fun run() {
         javaTargetDir.mkdirs()
@@ -45,6 +49,7 @@ open class MybatisGeneratorTask: DefaultTask() {
         val config: Configuration = cp.parseConfiguration(configFile)
         configuration.resolvedConfiguration.files.forEach {
             config.addClasspathEntry(it.absolutePath)
+            project.logger.info("Adding {} to the classpath", it.absolutePath)
         }
         val callback = DefaultShellCallback(overwrite)
         val myBatisGenerator = MyBatisGenerator(config, callback, warnings)
