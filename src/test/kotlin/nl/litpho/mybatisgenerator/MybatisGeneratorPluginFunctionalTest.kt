@@ -22,12 +22,15 @@ class MybatisGeneratorPluginFunctionalTest {
     private fun getBuildFile(): File = tempDir.resolve("build.gradle")
     private fun getSettingsFile(): File = tempDir.resolve("settings.gradle")
     private fun getConfigFile(): File = tempDir.resolve("generatorConfig.xml")
+    private fun getChangelogFile(): File = tempDir.resolve("changelog-master.xml")
 
     @Test
     fun `can run task`() {
         getSettingsFile().writeText("")
-        val url = MybatisGeneratorPluginFunctionalTest::class.java.getResource("/nl/litpho/mybatisgenerator/generatorConfig.xml")!!
-        File(url.file).copyTo(getConfigFile())
+        val generatorConfigUrl = MybatisGeneratorPluginFunctionalTest::class.java.getResource("/nl/litpho/mybatisgenerator/generatorConfig.xml")!!
+        File(generatorConfigUrl.file).copyTo(getConfigFile())
+        val changelogMasterUrl = MybatisGeneratorPluginFunctionalTest::class.java.getResource("/nl/litpho/mybatisgenerator/changelog-master.xml")!!
+        File(changelogMasterUrl.file).copyTo(getChangelogFile())
         getBuildFile().writeText("""
 plugins {
     id('nl.litpho.mybatisgenerator')
@@ -39,8 +42,19 @@ repositories {
 
 mybatisgenerator {
     configFile = file("generatorConfig.xml")
-    javaTargetDir = file("${'$'}{project.buildDir}/generatedSources/src/main/java")
-    resourcesTargetDir = file("${'$'}{project.buildDir}/generatedSources/src/main/resources")
+    directories {
+        java = file("${'$'}{project.buildDir}/generatedSources/src/main/java")
+        resources = file("${'$'}{project.buildDir}/generatedSources/src/main/resources")
+    }
+    database {
+        connectionUrl = "jdbc:h2:${'$'}{projectDir}/build/db/h2"
+        driverClass = "org.h2.Driver"
+        username = "sa"
+        password = ""
+    }
+    liquibase {
+        changelogLocation = file("changelog-master.xml")
+    }
 }
 
 dependencies {

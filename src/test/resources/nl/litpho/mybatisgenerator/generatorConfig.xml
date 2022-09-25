@@ -29,7 +29,7 @@
         </javaClientGenerator>
 
         <table schema="PUBLIC" tableName="%">
-
+            <property name="ignoreQualifiersAtRuntime" value="true"/>
         </table>
 
     </context>
