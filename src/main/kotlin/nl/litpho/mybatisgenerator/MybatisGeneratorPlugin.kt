@@ -14,6 +14,7 @@ class MybatisGeneratorPlugin : Plugin<Project> {
 
     override fun apply(project: Project) {
         val extension = project.extensions.create<MybatisGeneratorExtension>("mybatisgenerator")
+        val liquibaseRuntimeConfiguration = project.configurations.maybeCreate("liquibaseRuntime")
         val mybatisgeneratorRuntimeConfiguration = project.configurations.maybeCreate("mybatisgeneratorRuntime")
 
         project.tasks.register<MybatisGeneratorTask>("generate") {
@@ -49,7 +50,7 @@ class MybatisGeneratorPlugin : Plugin<Project> {
                     password.set(extension.databaseHandler.password)
                     changelogLocation.set(extension.liquibaseHandler.changelogLocation)
                     contexts.set(extension.liquibaseHandler.contexts)
-                    this.configuration = mybatisgeneratorRuntimeConfiguration
+                    this.configuration = liquibaseRuntimeConfiguration
                 }
 
                 project.tasks["generate"].dependsOn("generatorDatabaseUpdate")
