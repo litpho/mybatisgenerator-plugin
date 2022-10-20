@@ -56,7 +56,6 @@ class MybatisGeneratorPlugin : Plugin<Project> {
 
                 project.tasks["generate"].dependsOn("generatorDatabaseUpdate")
             }
-
         }
     }
 }

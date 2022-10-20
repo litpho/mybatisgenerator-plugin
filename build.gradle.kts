@@ -2,6 +2,7 @@ plugins {
     `java-gradle-plugin`
     `kotlin-dsl`
     `maven-publish`
+    id("com.diffplug.spotless") version ("6.11.0")
 }
 
 java.sourceCompatibility = JavaVersion.VERSION_17
@@ -39,4 +40,10 @@ gradlePlugin {
 
 tasks.withType<Test>() {
     useJUnitPlatform()
+}
+
+spotless {
+    kotlin {
+        ktlint()
+    }
 }

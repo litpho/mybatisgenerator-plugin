@@ -31,7 +31,8 @@ class MybatisGeneratorPluginFunctionalTest {
         File(generatorConfigUrl.file).copyTo(getConfigFile())
         val changelogMasterUrl = MybatisGeneratorPluginFunctionalTest::class.java.getResource("/nl/litpho/mybatisgenerator/changelog-master.xml")!!
         File(changelogMasterUrl.file).copyTo(getChangelogFile())
-        getBuildFile().writeText("""
+        getBuildFile().writeText(
+            """
 plugins {
     id('nl.litpho.mybatisgenerator')
 }
@@ -60,7 +61,8 @@ mybatisgenerator {
 dependencies {
     mybatisgeneratorRuntime 'com.h2database:h2:2.1.214'
 }
-""")
+"""
+        )
 
         val result = GradleRunner.create().apply {
             forwardOutput()
