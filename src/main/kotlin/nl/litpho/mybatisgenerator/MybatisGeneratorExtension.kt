@@ -51,5 +51,10 @@ open class DatabaseHandler @Inject constructor(objects: ObjectFactory) {
 
 open class LiquibaseHandler @Inject constructor(objects: ObjectFactory) {
     val changelogLocation: RegularFileProperty = objects.fileProperty()
+    val logLevel: Property<LiquibaseLogLevel> = objects.property<LiquibaseLogLevel>().convention(LiquibaseLogLevel.INFO)
     val contexts: ListProperty<String> = objects.listProperty<String>().convention(listOf("none"))
+}
+
+enum class LiquibaseLogLevel {
+    OFF, WARNING, INFO, FINE, SEVERE
 }

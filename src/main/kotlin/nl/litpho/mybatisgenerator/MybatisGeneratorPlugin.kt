@@ -49,6 +49,7 @@ class MybatisGeneratorPlugin : Plugin<Project> {
                     username.set(extension.databaseHandler.username)
                     password.set(extension.databaseHandler.password)
                     changelogLocation.set(extension.liquibaseHandler.changelogLocation)
+                    logLevel.set(extension.liquibaseHandler.logLevel)
                     contexts.set(extension.liquibaseHandler.contexts)
                     this.configuration = liquibaseRuntimeConfiguration
                 }
