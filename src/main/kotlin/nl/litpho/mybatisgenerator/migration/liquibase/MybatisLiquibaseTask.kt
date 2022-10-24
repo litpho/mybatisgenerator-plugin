@@ -66,11 +66,13 @@ open class MybatisLiquibaseTask : JavaExec() {
 
         errorOutput = ByteArrayOutputStream()
 
-        super.exec()
-
-        errorOutput.toString()
-            .lines()
-            .filter { line -> "License" !in line }
-            .forEach(logger::lifecycle)
+        try {
+            super.exec()
+        } finally {
+            errorOutput.toString()
+                .lines()
+                .filter { line -> "License" !in line }
+                .forEach(logger::lifecycle)
+        }
     }
 }
