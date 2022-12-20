@@ -39,7 +39,7 @@ gradlePlugin {
         description = "Gradle Mybatisgenerator plugin using Liquibase"
         vcsUrl.set("https://github.com/litpho/mybatisgenerator-plugin")
         website.set("https://github.com/litpho/mybatisgenerator-plugin")
-        tags.set(listOf("mybatis", "mybatisgenerator", "liquibase", "plugin"))
+        tags.set(listOf("mybatis", "mybatisgenerator", "liquibase"))
     }
 }
 
