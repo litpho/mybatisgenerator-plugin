@@ -4,7 +4,10 @@ plugins {
     signing
     id("com.diffplug.spotless") version ("6.11.0")
     id("com.gradle.plugin-publish") version "1.1.0"
+    id("pl.allegro.tech.build.axion-release") version("1.14.3")
 }
+
+project.version = scmVersion.version
 
 java.sourceCompatibility = JavaVersion.VERSION_17
 
