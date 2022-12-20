@@ -6,6 +6,7 @@ import org.gradle.api.file.RegularFileProperty
 import org.gradle.api.provider.ListProperty
 import org.gradle.api.provider.Property
 import org.gradle.api.tasks.Input
+import org.gradle.api.tasks.InputFile
 import org.gradle.api.tasks.Internal
 import org.gradle.api.tasks.JavaExec
 import org.gradle.api.tasks.TaskAction
@@ -28,7 +29,7 @@ open class MybatisLiquibaseTask : JavaExec() {
     @Input
     val password: Property<String> = project.objects.property()
 
-    @Input
+    @InputFile
     val changelogLocation: RegularFileProperty = project.objects.fileProperty()
 
     @Input

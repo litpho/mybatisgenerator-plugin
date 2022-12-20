@@ -4,11 +4,13 @@ import io.kotest.matchers.should
 import io.kotest.matchers.string.contain
 import org.gradle.testkit.runner.GradleRunner
 import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.io.CleanupMode
 import org.junit.jupiter.api.io.TempDir
 import java.io.File
 
+@Disabled
 class MybatisGeneratorPluginFunctionalTest {
 
     @TempDir(cleanup = CleanupMode.NEVER)
